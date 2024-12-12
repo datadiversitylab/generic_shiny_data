@@ -3,98 +3,327 @@ library(shinyjs)
 library(leaflet)
 library(DT)
 library(bslib)
+library(shinyWidgets)
+library(DBI)
+library(RSQLite)
 
-# Sample data
-population_data <- data.frame(
-  name = c("Population A", "Population B", "Population C", "Population D"),
-  species = c("Species 1", "Species 2", "Species 3", "Species 4"),
-  longitude = c(-110.95, -110.97, -110.92, -110.93),
-  latitude = c(32.23, 32.24, 32.25, 32.26),
-  behavior = c("Behavior 1", "Behavior 2", "Behavior 3", "Behavior 4"),
-  url = c("http://test.com/a", "http://test.com/b", "http://test.com/c", "http://test.com/d")
-)
-
-ui <- navbarPage(
-  
-  theme = bs_theme(bootswatch = "minty"),
-  
-  title = "The ACDB",
-  
-  # Landing page
-  tabPanel(
-    "Landing Page",
-    fluidPage(
-      titlePanel("Welcome to the Animal Culture Database"),
-      fluidRow(
-        column(6, h3("Text Placeholder"), p("This is placeholder text for the landing page."))
+# UI
+ui <- 
+  navbarPage(
+    id = "tabs",
+    theme = bs_theme(bootswatch = "cosmo",
+                     primary = "#4CAF50",
+                     secondary = "#555555",
+                     base_font = font_google("Roboto")  # Use a modern Google font
+                     ),
+    div(
+      tags$img(src = "DDL logo_white.png", style = "height: 40px; margin-right: 10px;"),
+      style = "font-size: 24px; font-weight: bold; padding: 0 20px;",
+      "The Animal Culture Database"
+    ),    
+    header = tags$style(
+      HTML("
+      .navbar-nav {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+      }
+      .navbar-nav > li > a {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 15px 20px;
+      }
+    ")
+    ),
+    # Landing page
+    tabPanel(
+      tags$div(icon("home"), "Home"),
+      fluidPage(
+        tags$div(
+          style = "max-width: 900px; margin: 0 auto; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.8;",
+          
+          tags$div(
+            style = "background-color: #f9f9f9; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+            
+            # Title and subtitle
+            tags$h1(
+              style = "font-size: 48px; font-weight: 300; text-align: center; color: #4CAF50; margin-bottom: 20px;",
+              "Animal Culture Database (ACDB)"
+            ),
+            tags$h2(
+              style = "font-size: 24px; font-weight: 300; text-align: center; color: #555555; margin-bottom: 40px;",
+              "Exploring the World’s Diversity of Nonhuman Animal Traditions"
+            ),
+            
+            # Introduction text
+            tags$p(
+              style = "text-align: justify; margin-bottom: 15px;",
+              "Welcome to the Animal Culture Database, a resource designed to bring together and highlight the richness of socially transmitted behaviors in nonhuman animal populations. In this database, we’ve consolidated data on XXX, and other cultural traditions—all for YY species in one central place."
+            ),
+            tags$p(
+              style = "text-align: justify; margin-bottom: 15px;",
+              "Through our interactive platform, you will be able to explore how species and populations around the globe navigate their environments, share knowledge, and respond to changes. Our goal is to make it easier to spot patterns in cultural diversity, identify gaps in current understanding, and ultimately inform conservation efforts that account for these dynamic, learned behaviors."
+            ),
+            tags$p(
+              style = "text-align: justify; margin-bottom: 15px;",
+              "We invite researchers, conservationists, educators, and the public to use the database, discover hidden connections, and contribute with new observations."
+            ),
+            tags$div(
+              style = "text-align: center;",
+              actionButton(inputId = "explore_button", 
+                           label = "Explore the Database",
+                           style = "display:inline-block; padding: 15px 30px; border-radius: 5px; background: #4CAF50; color: #ffffff; text-decoration: none; font-size: 18px; font-weight: 400; transition: background 0.3s ease;")
+              
+            )
+          ),
+          
+          # Quick Stats Section
+          tags$div(
+            style = "margin-top: 40px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+            tags$h3(
+              style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center; margin-bottom: 20px;",
+              "Quick Stats"
+            ),
+            tags$div(
+              style = "display: flex; justify-content: space-around; text-align: center;",
+              tags$div(
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "120+"),
+                tags$p(style = "font-size: 16px; color: #555;", "Species covered")
+              ),
+              tags$div(
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "200+"),
+                tags$p(style = "font-size: 16px; color: #555;", "Behaviors documented")
+              ),
+              tags$div(
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "50+"),
+                tags$p(style = "font-size: 16px; color: #555;", "Populations cataloged")
+              )
+            )
+          )
+        )
       )
     )
-  ),
-  
-  # About tab
-  tabPanel(
-    "About",
-    fluidPage(
-      titlePanel("About"),
-      h3("Text Placeholder"),
-      p("This section contains information about the app.")
-    )
-  ),
-  
-  # Populations Tab
-  tabPanel(
-    "Populations",
-    fluidPage(
-      titlePanel("Populations"),
-      
-      # Map
-      leafletOutput("population_map", height = 400),
-      
-      # Data table
-      h3("Population data"),
-      dataTableOutput("population_table")
-    )
+    ,
+    
+    # Populations page
+    tabPanel(
+      value = "Populations_tab",
+      tags$div(icon("globe"), "Populations"),
+      fluidPage(
+        titlePanel("Populations"),
+        tags$div(
+          style = "max-width: 900px; margin: 0 auto; padding: 20px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.8;",
+          
+          tags$div(
+            style = "background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+            
+            # Introduction section
+            tags$h3(
+              style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center; margin-bottom: 20px;",
+              "Explore population-level data"
+            ),
+            tags$p(
+              style = "text-align: justify; margin-bottom: 15px;",
+              "This section allows you to explore population-level details drawn from the Animal Culture Database. Each population entry here reflects a group of individuals within a species that share specific sets of behaviors. Taken together, these data help highlight how cultural practices play out within and across distinct environments."
+            ),
+            tags$p(
+              style = "text-align: justify; margin-bottom: 15px;",
+              "Below, you’ll find an interactive map and a searchable table. The map is your starting point: navigate through various regions, click on a marker of interest, and get a quick snapshot of the behaviors documented there. The table provides a more in-depth look, featuring species names, descriptions of cultural traits, and notes on how these traditions are transmitted among individuals."
+            ),
+            tags$p(
+              style = "text-align: justify; margin-bottom: 0;",
+              "Selecting a specific population in the table will result in additional context on particular behaviors."
+            )
+          )
+        ),
+        
+        # Map and Table Section
+        tags$div(
+          style = "max-width: 1100px; margin: 40px auto;",
+          
+          # Map with a shadow effect
+          tags$div(
+            style = "background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 40px;",
+            tags$h4(
+              style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+              "Interactive Map"
+            ),
+            tags$p(
+              style = "margin-bottom: 10px;",
+              "Use the map below to explore regions and populations of interest."
+            ),
+            leafletOutput("population_map", height = 400)
+          ),
+          
+          # Table with a shadow effect
+          tags$div(
+            style = "background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+            tags$h4(
+              style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+              "Population Data Table"
+            ),
+            tags$p(
+              style = "margin-bottom: 10px;",
+              "Search or filter the table below for detailed population information."
+            ),
+            dataTableOutput("population_table")
+          )
+        )
+      )
+    ),
+    
+    tabPanel(tags$div(icon("question-circle"), "Help")),
   )
-)
+
 
 server <- function(input, output, session) {
+  # Connect to SQLite database
+  db_path <- "db/animal_culture_db.sqlite"  # Ensure the database file is in your working directory
+  conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
+  
+  # Read tables from the SQLite database
+  population_table <- dbReadTable(conn, "population_table")
+  taxonomy_table <- dbReadTable(conn, "taxonomy_table")
+  behavior_table <- dbReadTable(conn, "behavior_table")
+  references_table <- dbReadTable(conn, "references_table")
+  
+  # Ensure the connection is closed when the session ends
+  on.exit(dbDisconnect(conn))
+  
+  # Navigate to Populations tab when button is clicked
+  observeEvent(input$explore_button, {
+    updateTabsetPanel(session = session, inputId = "tabs", selected = "Populations_tab")
+  })
   
   # Render leaflet map
   output$population_map <- renderLeaflet({
-    leaflet(data = population_data) %>%
+    leaflet(data = population_table) %>%
       addTiles() %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        popup = ~paste("<b>Name:</b>", name, "<br>",
-                       "<b>Species:</b>", species, "<br>",
-                       "<b>Behavior:</b>", behavior)
+        popup = ~paste("<b>Population:</b>", population_name, "<br>",
+                       "<b>Location:</b>", location_name)
       )
   })
   
-  # Render data table
+  # Render the main population table
   output$population_table <- renderDataTable({
     datatable(
-      population_data[, c("name", "species", "longitude", "latitude", "behavior")],
-      options = list(pageLength = 5),
-      escape = FALSE,
-      rownames = FALSE
-    ) %>%
-      formatStyle(
-        "name",
-        cursor = "pointer",
-        color = "blue",
-        textDecoration = "underline"
-      )
+      population_table[, c("population_name", "longitude", "latitude", "location_name")],
+      selection = "single",
+      options = list(pageLength = 5)
+    )
   })
   
-  # Open link in new tab on row click
+  # Observe row selection to trigger the modal
   observeEvent(input$population_table_rows_selected, {
-    selected_row <- input$population_table_rows_selected
-    if (length(selected_row) > 0) {
-      selected_url <- population_data$url[selected_row]
-      shinyjs::runjs(sprintf("window.open('%s', '_blank')", selected_url))
-    }
+    selected_id <- population_table$population_id[input$population_table_rows_selected]
+    
+    # Selected taxonomy and behavior details based on population_id
+    selected_taxonomy <- taxonomy_table[taxonomy_table$population_id == selected_id, ]
+    selected_behaviors <- behavior_table[behavior_table$population_id == selected_id, ]
+    selected_references <- references_table[references_table$behavior_id %in% selected_behaviors$behavior_id, ]
+    selected_population <- population_table[population_table$population_id == selected_id, ]
+    
+    # Show the modal
+    showModal(modalDialog(
+      title = div(
+        style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center;",
+        paste("Details for", selected_population$population_name)
+      ),
+      div(
+        style = "background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 20px;",
+        
+        # Taxonomy Details
+        tags$h3(
+          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+          "Taxonomy Details"
+        ),
+        tableOutput("taxonomy_details_table")
+      ),
+      div(
+        style = "display: flex; gap: 20px; margin-bottom: 20px;",
+        
+        # Behavior Details
+        div(
+          style = "flex: 1; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+          tags$h3(
+            style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+            "Behavior Details"
+          ),
+          tableOutput("behavior_details_table")
+        )
+      ),
+      # References
+      div(
+        style = "flex: 1; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+        tags$h3(
+          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+          "References"
+        ),
+        uiOutput("reference_list")
+      ),
+      div(
+        style = "background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 20px;",
+        
+        # Map showing the location of the species
+        tags$h3(
+          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
+          "Location on Map"
+        ),
+        leafletOutput("details_map", height = 400)
+      ),
+      easyClose = TRUE,
+      footer = modalButton("Close")
+    ))
+    
+    # Render taxonomy details table
+    output$taxonomy_details_table <- renderTable({
+      selected_taxonomy[, c("population_name", "species", "genus", "family")]
+    })
+    
+    # Render behavior details table
+    output$behavior_details_table <- renderTable({
+      selected_behaviors[, c("behavior_name", "type_of_behavior")]
+    })
+    
+    # Render the map with species location
+    output$details_map <- renderLeaflet({
+      leaflet() %>%
+        addTiles() %>%
+        addMarkers(
+          lng = selected_population$longitude,
+          lat = selected_population$latitude,
+          popup = paste0(
+            "<b>Population:</b> ", selected_population$population_name, "<br>",
+            "<b>Location:</b> ", selected_population$location_name
+          )
+        ) %>%
+        setView(lng = selected_population$longitude, lat = selected_population$latitude, zoom = 12)
+    })
+    
+    # Render references
+    output$reference_list <- renderUI({
+      references_by_behavior <- split(selected_references$reference_text, selected_references$behavior_id)
+      tagList(
+        lapply(seq_along(references_by_behavior), function(i) {
+          tagList(
+            tags$h4(paste("Behavior", names(references_by_behavior)[i])),
+            tags$ul(
+              lapply(references_by_behavior[[i]], function(ref) {
+                tags$li(ref)
+              })
+            )
+          )
+        })
+      )
+    })
   })
 }
 
+
+
+
+
+# Run the Shiny app
 shinyApp(ui, server)
