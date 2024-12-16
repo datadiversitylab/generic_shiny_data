@@ -223,7 +223,6 @@ server <- function(input, output, session) {
 
   
   # Observe row selection to trigger the modal
-  # Observe row selection to trigger the modal
   observeEvent(input$groups_table_rows_selected, {
     selected_id <- groups_table$group_id[input$groups_table_rows_selected]
     
@@ -233,35 +232,37 @@ server <- function(input, output, session) {
     selected_references <- sources_table[sources_table$behavior_id %in% selected_behaviors$behavior_id, ]
     selected_group <- groups_table[groups_table$group_id == selected_id, ]
     
-    # Show modal with behavior details as text
+    # Show modal with tabs
     showModal(modalDialog(
+      size = "xl",
       title = div(
         style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center;",
         paste("Details for", selected_group$group_name)
       ),
       div(
         style = "background-color: #f9f9f9; padding: 20px;",
-        # Species Details
-        tags$h3("Species Details"),
-        tableOutput("species_details_text")
-      ),
-      div(
-        style = "background-color: #ffffff; padding: 20px;",
-        # Behavior Details
-        tags$h3("Behavior Details"),
-        uiOutput("behavior_details_text")  # Placeholder for behavior details as text
-      ),
-      div(
-        style = "background-color: #ffffff; padding: 20px;",
-        # References Section
-        tags$h3("References"),
-        uiOutput("references_text")  # Placeholder for references as text
-      ),
-      div(
-        style = "background-color: #f9f9f9; padding: 20px;",
-        # Group Location Map
-        tags$h3("Group Location Map"),
-        leafletOutput("modal_map", height = 400)
+        tabsetPanel(
+          id = "modal_tabs",
+          type = "tabs",
+          
+          # Tab for Species Details
+          tabPanel(
+            "Species Details",
+            uiOutput("species_details_text")  # Rendered UI for species details
+          ),
+          
+          # Tab for Behavior Details
+          tabPanel(
+            "Behavior Details",
+            uiOutput("behavior_details_text")  # Rendered UI for behavior details
+          ),
+          
+          # Tab for Map
+          tabPanel(
+            "Location Map",
+            leafletOutput("modal_map", height = 400)  # Rendered map in modal
+          )
+        )
       ),
       easyClose = TRUE,
       footer = modalButton("Close")
@@ -278,7 +279,7 @@ server <- function(input, output, session) {
                 sapply(names(species), function(col_name) {
                   paste0("<b>", col_name, ":</b> ", as.character(species[[col_name]]))
                 }),
-                collapse = "; "
+                collapse = "<br>"
               )
             )
           )
@@ -286,41 +287,57 @@ server <- function(input, output, session) {
       )
     })
     
-    
-    # Render behavior details as text paragraphs, each column boldfaced
+    # Render behavior details as collapsible sections
     output$behavior_details_text <- renderUI({
       tagList(
         lapply(seq_len(nrow(selected_behaviors)), function(i) {
           behavior <- selected_behaviors[i, ]
-          tagList(
-            lapply(names(behavior), function(col_name) {
-              tags$p(
-                tags$b(paste0(col_name, ": ")),
-                as.character(behavior[[col_name]])
-              )
-            })
-          )
-        })
-      )
-    })
-    
-    
-    # Render references grouped by behavior
-    output$references_text <- renderUI({
-      references_by_behavior <- split(selected_references$reference_text, selected_references$behavior_id)
-      tagList(
-        lapply(names(references_by_behavior), function(behavior_id) {
-          tagList(
-            tags$h4(paste("References for Behavior:", behavior_id)),
-            tags$ul(
-              lapply(references_by_behavior[[behavior_id]], function(ref) {
-                tags$li(ref)
+          tags$div(
+            style = "margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #ffffff;",
+            tags$h4(style = "color: #4CAF50; margin-bottom: 10px;", behavior$behavior),
+            tagList(
+              lapply(names(behavior), function(col_name) {
+                
+                # Check if the column name ends with "_source"
+                if (grepl("_source$", col_name)) {
+                  # Get references associated with the behavior
+                  behavior_source <- behavior[[col_name]]
+                  
+                  if (!behavior_source == "") {
+                    source_row <- sources_table[sources_table$source_id == behavior_source, ]
+                    
+                    if (nrow(source_row) > 0 && !is.na(source_row$doi)) {
+                      # Render as a hyperlink if DOI exists
+                      tags$p(
+                        tags$b(paste0(col_name, ": ")),
+                        tags$a(
+                          href = paste0("https://doi.org/", source_row$doi),
+                          target = "_blank",
+                          behavior_source
+                        )
+                      )
+                    } else {
+                      # Render as plain text if no DOI exists
+                      tags$p(
+                        tags$b(paste0(col_name, ": ")),
+                        as.character(behavior_source)
+                      )
+                    }
+                  }
+                } else {
+                  # Default behavior for non-_source columns
+                  tags$p(
+                    tags$b(paste0(col_name, ": ")),
+                    as.character(behavior[[col_name]])
+                  )
+                }
               })
             )
           )
         })
       )
     })
+    
     
     # Render map in modal
     output$modal_map <- renderLeaflet({
