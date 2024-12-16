@@ -215,8 +215,7 @@ server <- function(input, output, session) {
   output$groups_table <- renderDataTable({
     datatable(
       groups_table[, c("group_name", "lat", "long", "location_evidence")],
-      selection = "single",
-      options = list(pageLength = 5)
+      selection = "single"
     )
   })
   
