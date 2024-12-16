@@ -153,6 +153,7 @@ ui <-
               "Use the map below to explore regions and populations of interest."
             ),
             leafletOutput("population_map", height = 400)
+            
           ),
           
           # Table with a shadow effect
@@ -166,7 +167,7 @@ ui <-
               style = "margin-bottom: 10px;",
               "Search or filter the table below for detailed population information."
             ),
-            dataTableOutput("population_table")
+            dataTableOutput("groups_table")
           )
         )
       )
@@ -184,10 +185,11 @@ server <- function(input, output, session) {
   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
   
   # Read tables from the SQLite database
-  population_table <- dbReadTable(conn, "population_table")
-  taxonomy_table <- dbReadTable(conn, "taxonomy_table")
-  behavior_table <- dbReadTable(conn, "behavior_table")
-  references_table <- dbReadTable(conn, "references_table")
+  groups_table <- dbReadTable(conn, "groups_table")
+  species_table <- dbReadTable(conn, "species_table")
+  behaviors_table <- dbReadTable(conn, "behaviors_table")
+  sources_table <- dbReadTable(conn, "sources_table")
+  
   
   # Ensure the connection is closed when the session ends
   on.exit(dbDisconnect(conn))
@@ -199,120 +201,119 @@ server <- function(input, output, session) {
   
   # Render leaflet map
   output$population_map <- renderLeaflet({
-    leaflet(data = population_table) %>%
+    leaflet(data = groups_table) %>%
       addTiles() %>%
       addCircleMarkers(
-        lng = ~longitude, lat = ~latitude,
-        popup = ~paste("<b>Population:</b>", population_name, "<br>",
-                       "<b>Location:</b>", location_name)
+        lng = ~long, lat = ~lat,
+        popup = ~paste("<b>Group:</b>", group_name, "<br>",
+                       "<b>Location Evidence:</b>", location_evidence)
       )
   })
   
+  
   # Render the main population table
-  output$population_table <- renderDataTable({
+  output$groups_table <- renderDataTable({
     datatable(
-      population_table[, c("population_name", "longitude", "latitude", "location_name")],
+      groups_table[, c("group_name", "lat", "long", "location_evidence")],
       selection = "single",
       options = list(pageLength = 5)
     )
   })
   
+
+  
   # Observe row selection to trigger the modal
-  observeEvent(input$population_table_rows_selected, {
-    selected_id <- population_table$population_id[input$population_table_rows_selected]
+  # Observe row selection to trigger the modal
+  observeEvent(input$groups_table_rows_selected, {
+    selected_id <- groups_table$group_id[input$groups_table_rows_selected]
     
-    # Selected taxonomy and behavior details based on population_id
-    selected_taxonomy <- taxonomy_table[taxonomy_table$population_id == selected_id, ]
-    selected_behaviors <- behavior_table[behavior_table$population_id == selected_id, ]
-    selected_references <- references_table[references_table$behavior_id %in% selected_behaviors$behavior_id, ]
-    selected_population <- population_table[population_table$population_id == selected_id, ]
+    # Filter relevant data
+    selected_species <- species_table[species_table$species_id == groups_table$species_id[groups_table$group_id == selected_id], ]
+    selected_behaviors <- behaviors_table[behaviors_table$group_id == selected_id, ]
+    selected_references <- sources_table[sources_table$behavior_id %in% selected_behaviors$behavior_id, ]
+    selected_group <- groups_table[groups_table$group_id == selected_id, ]
     
-    # Show the modal
+    # Show modal with behavior details as text
     showModal(modalDialog(
       title = div(
         style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center;",
-        paste("Details for", selected_population$population_name)
+        paste("Details for", selected_group$group_name)
       ),
       div(
-        style = "background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 20px;",
-        
-        # Taxonomy Details
-        tags$h3(
-          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
-          "Taxonomy Details"
-        ),
-        tableOutput("taxonomy_details_table")
+        style = "background-color: #f9f9f9; padding: 20px;",
+        # Species Details
+        tags$h3("Species Details"),
+        tableOutput("species_details_text")
       ),
       div(
-        style = "display: flex; gap: 20px; margin-bottom: 20px;",
-        
+        style = "background-color: #ffffff; padding: 20px;",
         # Behavior Details
-        div(
-          style = "flex: 1; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
-          tags$h3(
-            style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
-            "Behavior Details"
-          ),
-          tableOutput("behavior_details_table")
-        )
-      ),
-      # References
-      div(
-        style = "flex: 1; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
-        tags$h3(
-          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
-          "References"
-        ),
-        uiOutput("reference_list")
+        tags$h3("Behavior Details"),
+        uiOutput("behavior_details_text")  # Placeholder for behavior details as text
       ),
       div(
-        style = "background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 20px;",
-        
-        # Map showing the location of the species
-        tags$h3(
-          style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 15px;",
-          "Location on Map"
-        ),
-        leafletOutput("details_map", height = 400)
+        style = "background-color: #ffffff; padding: 20px;",
+        # References Section
+        tags$h3("References"),
+        uiOutput("references_text")  # Placeholder for references as text
+      ),
+      div(
+        style = "background-color: #f9f9f9; padding: 20px;",
+        # Group Location Map
+        tags$h3("Group Location Map"),
+        leafletOutput("modal_map", height = 400)
       ),
       easyClose = TRUE,
       footer = modalButton("Close")
     ))
     
-    # Render taxonomy details table
-    output$taxonomy_details_table <- renderTable({
-      selected_taxonomy[, c("population_name", "species", "genus", "family")]
-    })
-    
-    # Render behavior details table
-    output$behavior_details_table <- renderTable({
-      selected_behaviors[, c("behavior_name", "type_of_behavior")]
-    })
-    
-    # Render the map with species location
-    output$details_map <- renderLeaflet({
-      leaflet() %>%
-        addTiles() %>%
-        addMarkers(
-          lng = selected_population$longitude,
-          lat = selected_population$latitude,
-          popup = paste0(
-            "<b>Population:</b> ", selected_population$population_name, "<br>",
-            "<b>Location:</b> ", selected_population$location_name
+    # Render species details as a single paragraph with column names boldfaced
+    output$species_details_text <- renderUI({
+      tagList(
+        lapply(seq_len(nrow(selected_species)), function(i) {
+          species <- selected_species[i, ]
+          tags$p(
+            HTML(
+              paste(
+                sapply(names(species), function(col_name) {
+                  paste0("<b>", col_name, ":</b> ", as.character(species[[col_name]]))
+                }),
+                collapse = "; "
+              )
+            )
           )
-        ) %>%
-        setView(lng = selected_population$longitude, lat = selected_population$latitude, zoom = 12)
+        })
+      )
     })
     
-    # Render references
-    output$reference_list <- renderUI({
+    
+    # Render behavior details as text paragraphs, each column boldfaced
+    output$behavior_details_text <- renderUI({
+      tagList(
+        lapply(seq_len(nrow(selected_behaviors)), function(i) {
+          behavior <- selected_behaviors[i, ]
+          tagList(
+            lapply(names(behavior), function(col_name) {
+              tags$p(
+                tags$b(paste0(col_name, ": ")),
+                as.character(behavior[[col_name]])
+              )
+            })
+          )
+        })
+      )
+    })
+    
+    
+    # Render references grouped by behavior
+    output$references_text <- renderUI({
       references_by_behavior <- split(selected_references$reference_text, selected_references$behavior_id)
       tagList(
-        lapply(seq_along(references_by_behavior), function(i) {
+        lapply(names(references_by_behavior), function(behavior_id) {
           tagList(
-            tags$h4(paste("Behavior", names(references_by_behavior)[i])),
+            tags$h4(paste("References for Behavior:", behavior_id)),
             tags$ul(
-              lapply(references_by_behavior[[i]], function(ref) {
+              lapply(references_by_behavior[[behavior_id]], function(ref) {
                 tags$li(ref)
               })
             )
@@ -320,7 +321,23 @@ server <- function(input, output, session) {
         })
       )
     })
+    
+    # Render map in modal
+    output$modal_map <- renderLeaflet({
+      leaflet() %>%
+        addTiles() %>%
+        addMarkers(
+          lng = selected_group$long,
+          lat = selected_group$lat,
+          popup = paste0(
+            "<b>Group:</b> ", selected_group$group_name, "<br>",
+            "<b>Location Evidence:</b> ", selected_group$location_evidence
+          )
+        ) %>%
+        setView(lng = selected_group$long, lat = selected_group$lat, zoom = 12)
+    })
   })
+  
 }
 
 

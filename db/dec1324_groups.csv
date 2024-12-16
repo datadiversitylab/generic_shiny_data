@@ -1,0 +1,36 @@
+group_id,species_id,group_name,group_level,group_above,size,size_evidence,size_date,size_source,location_evidence,lat,long,location_source
+g1,Berardius_bairdii,Resident Commander Islands beaked whales,NA,,NA,,NA,NA,"southwest coast of Bering Island, Commander Islands, ""about 175 km (109 mi) east of the Kamchatka Peninsula. Geologically they comprise the westernmost part of the Aleutian Islands""",55.0078111,166.2776921,filatova2024
+g10,Chersophilus_duponti,Ebro Valley Dupont's Lark,NA,,NA,"""In study fragments, we digitally recorded a total of 216 calling individuals and 113 singing individuals from an estimated 450 males...In patches occupied by < 10 males, we recorded a slightly greater proportion of individuals (66–100%) than in larger populations (40–90%)""",NA,NA,"Ebro Valley, Spain",41.84866159,-1.657646337,laiolo2007
+g11,Nectarinia_osea,Ramat-Aviv low dialect sunbirds,NA,,NA,"""60% of the males (37 territorial males), all singing the low dialect, inhabiting one area""",NA,NA,"Ramat-Aviv neighborhood, Israel",32.107476,34.795951,leader2005
+g12,Megaptera_novaeangliae,Southern Hemisphere Group V,NA,,NA,,NA,NA,"Vava'u island cluster, Hunga, Nua Papu around Tonga",-18.622756,-173.9902982,eriksen2005
+g13,Tursiops_aduncus,Shark Bay dolphins,NA,,NA,,NA,NA,"Eastern Gulf of Shark Bay, Western Australia 113°45′E, 25°48′S",-25.7834193,113.2987712,krutzen2005
+g14,Poecile_atricapillus,Fort Collins chickadees,NA,,NA,,NA,NA,"Fort Collins, CO, US",40.5852602,-105.084423,gammon2004
+g15,Loxigilla_noctis,Colony Club site finches,NA,,NA,,NA,NA,"Colony Club hotel, St. James, Barbados",13.1941412,-59.6404662,reader2002
+g16,Cebus_capucinus,Lomas Barbudal capuchins,NA,,NA,20-37,NA,NA,"Guanacaste Province in Northwestern (NW) Costa Rica (Lomas Barbudal (LV) Biological Reserve [10° 30 N, 85° 22 W]",10.433333,-85.4,panger2002
+g17,Cebus_capucinus,Palo Verde capuchins,NA,,19,about 19 individuals,NA,NA,"Palo Verde (PV) National Park [10° 19–10° 24 N, 85° 18–85° 25 W]",10.333333,-85.333333,panger2002
+g18,Cebus_capucinus,Santa Rosa capuchins,NA,,18,about 18 individuals,NA,NA,"Santa Rosa (SR) National Park [10° 45–11° 00N, 85° 30–85° 45]",10.883611,-85.775,panger2002
+g19,Melospiza_georgiana,Conneaut Lake swamp sparrows,NA,,NA,,NA,NA,"Conneaut Lake, Pennsylvania, U.S",41.6033874,-80.3053416,nowicki2001
+g2,Cervus_canadensis,Wyoming elk group,NA,,NA,,NA,NA,"Yellowstone National Park, Wyoming",44.5979182,-110.561249,nelsonreinier2023
+g20,Tursiops_aduncus,Moreton Bay trawler dolphins,NA,,NA,trawler dolphin community had larger schools than non-trawlers,NA,NA,"eastern Moreton Bay, Queensland, Australia",-27.0946084,152.9205918,chilvers2001
+g21,Tursiops_aduncus,Moreton Bay non-trawler dolphins,NA,,NA,trawler dolphin community had larger schools than non-trawlers,NA,NA,"eastern Moreton Bay, Queensland, Australia",-27.0946084,152.9205918,chilvers2001
+g22,Poecile_atricapillus,Lee Martinez Park (LMP) black-capped chickadees,NA,,NA,,NA,NA,"Lee Martinez Park (LMP) Fort Collins, Colorado",40.5960753,-105.0821847,baker2000
+g23,Poecile_atricapillus,Mulberry/Lemay (ML) black-capped chickadees,NA,,NA,,NA,NA,"Mulberry/Lemay (ML) Fort Collins, Colorado",40.5813251,-105.0569556,baker2000
+g24,Poecile_atricapillus,Environmental Learning Center (ELC) black-capped chickadees,NA,,NA,,NA,NA,"Environmental Learning Center (ELC) along Cache La Poudre River in Fort Collins, Colorado",40.556341,-105.019689,baker2000
+g25,Larus_occidentalis,Alcatraz Western gulls,NA,,NA,101 pairs monitored,NA,NA,"Alcatraz Island, CA, US",37.8266636,-122.4230122,annett1999
+g26,Campylorhynchus_nuchalis,Hato Masaguaral wrens,NA,,NA,"groups are made of a breeding pair and up to 12 non-breeding alloparents, usually offspring from previous years who have not dispersed. authors recorded calls from 46 breeding males, 22 male helpers, and 14 females from 30 groups (Price 1998)",NA,NA,"Hato Masaguaral cattle ranch, 300 km south of Caracas, Venezuela",10.4805937,-66.9036063,price1998
+g27,Passerina_cyanea,George Reserve Indigo buntings,NA,,NA,authors recorded 80-180 males in each area (Payne 1996),NA,NA,"E.S. George Reserve, southern Michigan",42.4584698,-84.0114544,payne1996
+g28,Molothrus_ater,Lee Vining dialect brown-headed cowbirds,NA,,NA,,NA,NA,"Lee Vining, eastern Sierra Nevada, California",37.957592,-119.119943,ologhlen1995
+g29,Molothrus_ater,Convict dialect brown-headed cowbirds,NA,,NA,,NA,NA,"Convict Lake,eastern Sierra Nevada, California",37.5898951,-118.8582239,ologhlen1995
+g3,Cervus_canadensis,Colorado elk group,NA,,NA,,NA,NA," Rock Mountain National Park, Colorado",39.5500507,-105.7820674,nelsonreinier2023
+g30,Rattus_rattus,Israeli pine cone population,NA,,NA,unclear,NA,NA,"Kibbutz Ramot Menashe, Israel",32.5977491,35.0586695,terkel1995
+g31,Rattus_rattus,Israeli cypress population,NA,,NA,unclear,NA,NA,"Kibbutz Ramot Menashe, Israel",32.5977491,35.0586695,terkel1995
+g32,Fringilla_coelebs,Chatham Island population,NA,,NA,,NA,NA,Chatham Island,-43.9271098,-176.4592091,baker1987
+g33,Nectarinia_osea,Ramat-Aviv high dialect sunbirds,NA,,NA,"""33% (21 territorial males), singing the high dialect""",NA,NA,"Ramat-Aviv neighborhood, Israel",32.107476,34.795951,leader2005
+g34,Corvus_moneduloides,Grande Terre New Caledonian crows,NA,New Caledonian crows,NA,,NA,NA,NA,NA,NA,NA
+g35,Corvus_moneduloides,New Caledonian crows,NA,,NA,,NA,NA,NA,NA,NA,NA
+g4,Cervus_canadensis,Pennsylvania elk group,NA,,NA,,NA,NA," Elk County, Pennsylvania",41.4284924,-78.5660852,nelsonreinier2023
+g5,Corvus_moneduloides,Mare Island New Caledonian crows,NA,New Caledonian crows,NA,,NA,NA,"""Mare, New Caledonia, about 5 km inland from Wabao village""",-21.5986249,167.9353127,holzhaider2010
+g6,Junco_hyemalis,UCSD dark-eyed juncos,NA,,NA,about 70 males in total population,NA,NA,,32.8801,-117.234,newman2008
+g7,Orcinus_orca,Avacha acoustic clan,NA,,200,"""Avacha clan, consisting of more than 200 whales in at least 12 pods""",NA,NA,"Avacha Gulf, Kamchatka, Sea of Okhotsk",61.4343981,166.7884131,filatova2007
+g8,Orcinus_orca,K19 acoustic clan,NA,,NA,,NA,NA,"Avacha Gulf, Kamchatka, Sea of Okhotsk",61.4343981,166.7884131,filatova2007
+g9,Orcinus_orca,K20 acoustic clan,NA,,NA,,NA,NA,"Avacha Gulf, Kamchatka, Sea of Okhotsk",61.4343981,166.7884131,filatova2007
