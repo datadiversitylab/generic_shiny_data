@@ -258,6 +258,23 @@ ui <-
           )
         )
       )
+    ),
+    
+    tabPanel(
+      "Edit Database",
+      sidebarLayout(
+        sidebarPanel(
+          selectInput("edit_table_select", "Select Table to Edit:", 
+                      choices = c("groups_table", "species_table", "behaviors_table", "sources_table")),
+          actionButton("save_changes", "Save Changes", class = "btn-success"),
+          actionButton("refresh_app", "Refresh App", class = "btn-primary")  # Refresh button
+        ),
+        mainPanel(
+          h4("Edit Table:"),
+          DTOutput("editable_table"),
+          verbatimTextOutput("edit_info")  # To preview edits made
+        )
+      )
     )
     
     
@@ -276,7 +293,7 @@ server <- function(input, output, session) {
   sources_table <- dbReadTable(conn, "sources_table")
   
   # Ensure the connection is closed when the session ends
-  on.exit(dbDisconnect(conn))
+  #on.exit(dbDisconnect(conn))
   
   # Compute stats
   species_count <- length(unique(species_table$species_id))
@@ -486,6 +503,51 @@ server <- function(input, output, session) {
     selected_id <- input$map_click
     showGroupModal(selected_id)
   })
+  
+  # Reactive value to store selected table
+  selected_table <- reactiveVal()
+  
+  # Load selected table into reactive value
+  observeEvent(input$edit_table_select, {
+    table_data <- dbReadTable(conn, input$edit_table_select)
+    selected_table(table_data)
+  })
+  
+  # Render editable table
+  output$editable_table <- renderDT({
+    req(selected_table())
+    datatable(selected_table(), editable = TRUE)
+  })
+  
+  # Store edits in reactive values
+  edits <- reactiveValues(data = NULL)
+  
+  observeEvent(input$editable_table_cell_edit, {
+    info <- input$editable_table_cell_edit
+    str(info)  # Display edit info for debugging
+    edits$data <- editData(selected_table(), info, proxy = DT::dataTableProxy("editable_table"))
+  })
+  
+  # Save updated table to database
+  observeEvent(input$save_changes, {
+    req(edits$data)
+    dbWriteTable(conn, input$edit_table_select, edits$data, overwrite = TRUE)
+    showNotification(paste("Table", input$edit_table_select, "updated successfully!"), type = "message")
+    # Reload table to confirm changes
+    selected_table(edits$data)
+  })
+  
+  # Refresh the app
+  observeEvent(input$refresh_app, {
+    showNotification("Refreshing the app to reflect changes...", type = "message")
+    session$reload()  # Reload the app
+  })
+  
+  # Close database connection on session end
+  onSessionEnded(function() {
+    dbDisconnect(conn)
+  })
+  
 }
 
 
