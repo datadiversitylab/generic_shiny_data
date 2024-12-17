@@ -39,7 +39,7 @@ You can access the ACDB Shiny app [here](#). The app provides an interactive int
 ### Repository Contents
 
 - `app.R`: The Shiny app script.
-- `data/`: Dataset files used by the app.
+- `db/`: Dataset files used by the app.
 - `www/`: Additional resources for the app (images, stylesheets).
 - `README.md`: This file.
 - `LICENSE`: License information.
