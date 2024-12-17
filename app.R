@@ -33,6 +33,7 @@ ui <-
         font-weight: 500;
         padding: 15px 20px;
       }
+      .navbar { position: sticky; top: 0; z-index: 1020; }
     ")
     ),
     # Landing page
@@ -58,15 +59,15 @@ ui <-
             # Introduction text
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "Welcome to the Animal Culture Database, a resource designed to bring together and highlight the richness of socially transmitted behaviors in nonhuman animal populations. In this database, we’ve consolidated data on XXX, and other cultural traditions—all for YY species in one central place."
+              " In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam luctus, ipsum quis posuere aliquam, justo felis eleifend arcu, quis vehicula ligula diam in massa. Sed sed nisl et tellus iaculis vulputate at eget quam. Duis sed tortor tellus. Aenean lacus neque, congue sit amet ligula id, condimentum accumsan justo. Nunc eu cursus massa, in dictum orci. Phasellus a erat in dui consectetur dapibus. "
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "Through our interactive platform, you will be able to explore how species and populations around the globe navigate their environments, share knowledge, and respond to changes. Our goal is to make it easier to spot patterns in cultural diversity, identify gaps in current understanding, and ultimately inform conservation efforts that account for these dynamic, learned behaviors."
+              " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus feugiat justo, non efficitur augue fringilla id. Donec at elit blandit, faucibus nisi eu, posuere turpis. Aenean dapibus odio eu diam euismod, vel interdum elit pulvinar. Vivamus at lorem a neque hendrerit sollicitudin. Donec at suscipit neque. Integer eget gravida lacus. Maecenas luctus dapibus hendrerit. Integer vel metus sed diam volutpat sagittis. Aliquam eu convallis tellus. Ut hendrerit ut mauris accumsan egestas. Vivamus iaculis ut mauris sed eleifend. "
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "We invite researchers, conservationists, educators, and the public to use the database, discover hidden connections, and contribute with new observations."
+              " Sed pretium eros sit amet magna scelerisque, non posuere elit placerat. Pellentesque consectetur neque massa, nec commodo nisl convallis vel. Aliquam in pellentesque elit. Nulla bibendum rhoncus libero vitae viverra. Vivamus tincidunt enim a turpis scelerisque interdum. Nunc ullamcorper lacinia nulla, vitae tempus magna ultrices ut. Quisque bibendum viverra nisi ut mollis. Donec accumsan massa leo, non fringilla eros malesuada eu. Donec convallis justo vel commodo vulputate. "
             ),
             tags$div(
               style = "text-align: center;",
@@ -77,7 +78,7 @@ ui <-
             )
           ),
           
-          # Quick Stats Section
+          # Quick Stats Section 
           tags$div(
             style = "margin-top: 40px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
             tags$h3(
@@ -86,20 +87,27 @@ ui <-
             ),
             tags$div(
               style = "display: flex; justify-content: space-around; text-align: center;",
+              
+              # Species covered
               tags$div(
-                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "120+"),
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", uiOutput("species_count")),
                 tags$p(style = "font-size: 16px; color: #555;", "Species covered")
               ),
+              
+              # Behaviors documented
               tags$div(
-                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "200+"),
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", uiOutput("behavior_count")),
                 tags$p(style = "font-size: 16px; color: #555;", "Behaviors documented")
               ),
+              
+              # Populations cataloged
               tags$div(
-                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", "50+"),
+                tags$h4(style = "font-size: 20px; font-weight: bold; color: #333;", uiOutput("population_count")),
                 tags$p(style = "font-size: 16px; color: #555;", "Populations cataloged")
               )
             )
           )
+          
         )
       )
     )
@@ -110,7 +118,7 @@ ui <-
       value = "Populations_tab",
       tags$div(icon("globe"), "Populations"),
       fluidPage(
-        titlePanel("Populations"),
+        #titlePanel("Populations"),
         tags$div(
           style = "max-width: 900px; margin: 0 auto; padding: 20px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.8;",
           
@@ -124,15 +132,15 @@ ui <-
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "This section allows you to explore population-level details drawn from the Animal Culture Database. Each population entry here reflects a group of individuals within a species that share specific sets of behaviors. Taken together, these data help highlight how cultural practices play out within and across distinct environments."
+              " In non nulla sed neque pellentesque semper ut quis odio. Nulla pellentesque ante arcu, sit amet aliquam lectus aliquam at. Nunc semper quam eu ex eleifend, ut tempor lacus aliquam. Quisque at libero ipsum. Aliquam erat volutpat. Phasellus libero nulla, ultricies id aliquam id, sodales sit amet odio. Maecenas luctus sit amet ex eu faucibus. Sed blandit, tortor sed dignissim rutrum, lorem est congue elit, vitae dapibus nunc diam vitae metus. In sed tortor non ante laoreet laoreet. Cras vel tellus euismod, iaculis orci fringilla, efficitur dolor. Sed egestas ultrices accumsan. "
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "Below, you’ll find an interactive map and a searchable table. The map is your starting point: navigate through various regions, click on a marker of interest, and get a quick snapshot of the behaviors documented there. The table provides a more in-depth look, featuring species names, descriptions of cultural traits, and notes on how these traditions are transmitted among individuals."
+              " Vestibulum et erat at mauris ornare feugiat. Vivamus vitae augue ac neque congue egestas sed nec turpis. Nam dolor nunc, aliquam venenatis interdum mattis, luctus in velit. Nulla facilisi. Nullam interdum diam vel lobortis bibendum. Nulla ut sem elit. In at sapien fringilla, auctor elit ac, vulputate ante. Maecenas viverra consectetur venenatis. Cras eu dapibus augue, ut pretium quam. Sed commodo lacinia lacus accumsan mollis. Fusce imperdiet ligula eros, vitae pellentesque mauris convallis eu. Vestibulum facilisis purus in risus cursus, vitae eleifend mi consequat. "
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 0;",
-              "Selecting a specific population in the table will result in additional context on particular behaviors."
+              " Nunc placerat blandit enim, ac convallis magna pharetra at. Donec quis ornare mi, hendrerit tristique eros. Curabitur ultrices ultricies ornare. Suspendisse potenti. Cras iaculis turpis eget arcu pretium feugiat. Pellentesque condimentum lorem quis facilisis sollicitudin. Nulla eu lacus elementum, scelerisque quam non, condimentum turpis. Nunc at lectus at quam varius feugiat vitae ac ante. In suscipit sagittis augue accumsan maximus. Sed et elit et mi laoreet efficitur id quis neque. "
             )
           )
         ),
@@ -150,7 +158,7 @@ ui <-
             ),
             tags$p(
               style = "margin-bottom: 10px;",
-              "Use the map below to explore regions and populations of interest."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper risus massa, quis facilisis augue vehicula ut. Pellentesque posuere porta luctus. Integer massa erat, imperdiet non pharetra nec, tempus eget. "
             ),
             leafletOutput("population_map", height = 400)
             
@@ -165,7 +173,7 @@ ui <-
             ),
             tags$p(
               style = "margin-bottom: 10px;",
-              "Search or filter the table below for detailed population information."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non nunc vitae augue convallis maximus ut sit amet augue. Nunc egestas, dolor in cursus ultrices, enim diam fermentum diam, sed. "
             ),
             dataTableOutput("groups_table")
           )
@@ -173,7 +181,84 @@ ui <-
       )
     ),
     
-    tabPanel(tags$div(icon("question-circle"), "Help")),
+    tabPanel(
+      tags$div(icon("question-circle"), "Help"),
+      fluidPage(
+        tags$div(
+          style = "max-width: 900px; margin: 0 auto; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.8;",
+          
+          # Help Title
+          tags$div(
+            style = "background-color: #f9f9f9; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+            tags$h1(
+              style = "font-size: 36px; font-weight: bold; text-align: center; color: #4CAF50; margin-bottom: 20px;",
+              "Help and FAQs"
+            ),
+            tags$p(
+              style = "text-align: center; color: #555555; margin-bottom: 40px;",
+              " Nunc sodales libero et tortor interdum, nec viverra libero cursus. In lobortis ligula quam, vitae ultrices neque aliquam sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc sapien neque, faucibus in rutrum id, dignissim ut turpis. Pellentesque gravida mauris non convallis tristique. Mauris vel cursus nisi, in pretium neque. In hendrerit est eget sodales varius. "
+            )
+          ),
+          
+          # FAQ Sections
+          tags$div(
+            style = "margin-top: 20px;",
+            
+            # Question 1
+            tags$div(
+              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+              tags$h4(
+                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
+                "How do I search for populations?"
+              ),
+              tags$p(
+                style = "text-align: justify; margin: 0;",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis felis ac felis efficitur suscipit. Curabitur vitae lacus vel ligula aliquet dignissim quis eget lacus."
+              )
+            ),
+            
+            # Question 2
+            tags$div(
+              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+              tags$h4(
+                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
+                "How can I contribute data to the database?"
+              ),
+              tags$p(
+                style = "text-align: justify; margin: 0;",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent interdum, nisl eu interdum aliquet, felis nulla sollicitudin elit, in faucibus risus urna vel justo."
+              )
+            ),
+            
+            # Question 3
+            tags$div(
+              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+              tags$h4(
+                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
+                "Where can I learn more about animal culture?"
+              ),
+              tags$p(
+                style = "text-align: justify; margin: 0;",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper enim nec justo congue, ac cursus mauris aliquet. Pellentesque habitant morbi tristique senectus et netus."
+              )
+            ),
+            
+            # Question 4
+            tags$div(
+              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+              tags$h4(
+                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
+                "Who can I contact for technical support?"
+              ),
+              tags$p(
+                style = "text-align: justify; margin: 0;",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nisi erat. Fusce faucibus purus in magna vehicula consequat. Aliquam tempus vitae libero et laoreet."
+              )
+            )
+          )
+        )
+      )
+    )
     
     
   )
@@ -190,9 +275,18 @@ server <- function(input, output, session) {
   behaviors_table <- dbReadTable(conn, "behaviors_table")
   sources_table <- dbReadTable(conn, "sources_table")
   
-  
   # Ensure the connection is closed when the session ends
   on.exit(dbDisconnect(conn))
+  
+  # Compute stats
+  species_count <- length(unique(species_table$species_id))
+  behavior_count <- nrow(behaviors_table)
+  population_count <- nrow(groups_table)
+  
+  # Send stats to the UI
+  output$species_count <- renderText({ paste0(species_count, "+") })
+  output$behavior_count <- renderText({ paste0(behavior_count, "+") })
+  output$population_count <- renderText({ paste0(population_count, "+") })
   
   # Navigate to Populations tab when button is clicked
   observeEvent(input$explore_button, {
@@ -200,33 +294,75 @@ server <- function(input, output, session) {
   })
   
   # Render leaflet map
+  # Calculate the number of recorded behaviors per group
+  behavior_counts <- aggregate(behavior_id ~ group_id, data = behaviors_table, FUN = length)
+  colnames(behavior_counts)[2] <- "behavior_count"  # Rename column for clarity
+  
+  # Join groups_table with species_table to get species and common names
+  groups_with_species <- merge(groups_table, species_table, by.x = "species_id", by.y = "species_id", all.x = TRUE)
+  
+  # Join the behavior counts with the group data
+  groups_with_species <- merge(groups_with_species, behavior_counts, by.x = "group_id", by.y = "group_id", all.x = TRUE)
+  
+  # Replace NA behavior counts with 0 (for groups with no behaviors)
+  groups_with_species$behavior_count[is.na(groups_with_species$behavior_count)] <- 0
+  
+  # Render leaflet map
   output$population_map <- renderLeaflet({
-    leaflet(data = groups_table) %>%
-      addTiles() %>%
+    leaflet(data = groups_with_details) %>%
+      # Use modern tile provider for aesthetics
+      addProviderTiles(providers$CartoDB.Positron) %>%  # Light-themed tiles
       addCircleMarkers(
         lng = ~long, lat = ~lat,
-        popup = ~paste("<b>Group:</b>", group_name, "<br>",
-                       "<b>Location Evidence:</b>", location_evidence)
+        radius = 6,  # Marker size
+        color = "#4CAF50",  # Outline color
+        fillColor = "#2E7D32",  # Fill color
+        fillOpacity = 0.8,  # Transparency
+        weight = 2,  # Border weight
+        label = ~paste0(group_name, " (", behavior_count, " behaviors)"),  # Quick hover label
+        popup = ~paste0(
+          "<div style='font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #333;'>",
+          "<b style='font-size: 16px; color: #4CAF50;'>", group_name, "</b><br>",
+          "<b>Species:</b> ", canonicalName, "<br>",
+          "<b>Common Name:</b> ", common_name, "<br>",
+          "<b>Recorded Behaviors:</b> ", behavior_count, "<br>",
+          "<b>Location Evidence:</b> ", location_evidence, "<br>",
+          "<a href='#' style='color: #2E7D32; text-decoration: underline;' ",
+          "onclick='Shiny.setInputValue(\"map_click\", \"", group_id, "\", {priority: \"event\"}); return false;'>More...</a>",
+          "</div>"
+        )
+        , clusterOptions = markerClusterOptions()
       )
   })
+  
+  
+  
+  # Join groups_table with species_table to get species and common names
+  groups_with_details <- merge(groups_table, species_table, by.x = "species_id", by.y = "species_id", all.x = TRUE)
+  
+  # Join the behavior counts with the group data
+  groups_with_details <- merge(groups_with_details, behavior_counts, by.x = "group_id", by.y = "group_id", all.x = TRUE)
+  
+  # Replace NA behavior counts with 0 (for groups with no behaviors)
+  groups_with_details$behavior_count[is.na(groups_with_details$behavior_count)] <- 0
   
   
   # Render the main population table
   output$groups_table <- renderDataTable({
     datatable(
-      groups_table[, c("group_name", "lat", "long", "location_evidence")],
-      selection = "single"
+      groups_with_details[, c("group_name", "canonicalName", "common_name", "behavior_count", "lat", "long", "location_evidence")],
+      colnames = c("Group Name", "Species Name", "Common Name", "Number of Behaviors", "Latitude", "Longitude", "Location Evidence"),
+      selection = "single",
+      options = list(pageLength = 10),
+      extensions = 'Buttons'
     )
   })
   
-
-  
-  # Observe row selection to trigger the modal
-  observeEvent(input$groups_table_rows_selected, {
-    selected_id <- groups_table$group_id[input$groups_table_rows_selected]
-    
+  # Function to display modal based on selected group_id
+  showGroupModal <- function(selected_id) {
     # Filter relevant data
-    selected_species <- species_table[species_table$species_id == groups_table$species_id[groups_table$group_id == selected_id], ]
+    species_id <- groups_table$species_id[groups_table$group_id == selected_id]
+    selected_species <- species_table[species_table$species_id == species_id, ]
     selected_behaviors <- behaviors_table[behaviors_table$group_id == selected_id, ]
     selected_references <- sources_table[sources_table$behavior_id %in% selected_behaviors$behavior_id, ]
     selected_group <- groups_table[groups_table$group_id == selected_id, ]
@@ -234,59 +370,45 @@ server <- function(input, output, session) {
     # Show modal with tabs
     showModal(modalDialog(
       size = "xl",
-      title = div(
-        style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center;",
-        paste("Details for", selected_group$group_name)
-      ),
+      title = div(style = "font-size: 24px; font-weight: bold; color: #4CAF50; text-align: center;",
+                  paste("Details for", selected_group$group_name)),
       div(
         style = "background-color: #f9f9f9; padding: 20px;",
         tabsetPanel(
           id = "modal_tabs",
           type = "tabs",
-          
-          # Tab for Species Details
-          tabPanel(
-            "Species Details",
-            uiOutput("species_details_text")  # Rendered UI for species details
-          ),
-          
-          # Tab for Behavior Details
-          tabPanel(
-            "Behavior Details",
-            uiOutput("behavior_details_text")  # Rendered UI for behavior details
-          ),
-          
-          # Tab for Map
-          tabPanel(
-            "Location Map",
-            leafletOutput("modal_map", height = 400)  # Rendered map in modal
-          )
+          tabPanel("Taxonomic Information", uiOutput("species_details_text")),
+          tabPanel("Behavior Details", uiOutput("behavior_details_text")),
+          tabPanel("Location Map", leafletOutput("modal_map", height = 400))
         )
       ),
       easyClose = TRUE,
       footer = modalButton("Close")
     ))
     
-    # Render species details as a single paragraph with column names boldfaced
+    # Render species details
     output$species_details_text <- renderUI({
       tagList(
-        lapply(seq_len(nrow(selected_species)), function(i) {
-          species <- selected_species[i, ]
-          tags$p(
-            HTML(
-              paste(
-                sapply(names(species), function(col_name) {
-                  paste0("<b>", col_name, ":</b> ", as.character(species[[col_name]]))
-                }),
-                collapse = "<br>"
+        tags$div(
+          style = "margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #ffffff;",
+          lapply(seq_len(nrow(selected_species)), function(i) {
+            species <- selected_species[i, ]
+            tags$p(
+              HTML(
+                paste(
+                  sapply(names(species), function(col_name) {
+                    paste0("<b>", col_name, ":</b> ", as.character(species[[col_name]]))
+                  }),
+                  collapse = "<br>"
+                )
               )
             )
-          )
-        })
+          })
+        )
       )
     })
     
-    # Render behavior details as collapsible sections
+    # Render behavior details
     output$behavior_details_text <- renderUI({
       tagList(
         lapply(seq_len(nrow(selected_behaviors)), function(i) {
@@ -337,7 +459,6 @@ server <- function(input, output, session) {
       )
     })
     
-    
     # Render map in modal
     output$modal_map <- renderLeaflet({
       leaflet() %>%
@@ -352,8 +473,19 @@ server <- function(input, output, session) {
         ) %>%
         setView(lng = selected_group$long, lat = selected_group$lat, zoom = 12)
     })
+  }
+  
+  # Trigger modal via table row selection
+  observeEvent(input$groups_table_rows_selected, {
+    selected_id <- groups_table$group_id[input$groups_table_rows_selected]
+    showGroupModal(selected_id)
   })
   
+  # Trigger modal via map marker click
+  observeEvent(input$map_click, {
+    selected_id <- input$map_click
+    showGroupModal(selected_id)
+  })
 }
 
 
