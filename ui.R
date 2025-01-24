@@ -5,6 +5,10 @@
 # Used to define the graphical aspects of the app.
 ###################
 
+library(bslib)
+library(leaflet)
+library(DT)
+
 ui <- 
   navbarPage(
     id = "tabs",
@@ -173,7 +177,7 @@ ui <-
               style = "margin-bottom: 10px;",
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non nunc vitae augue convallis maximus ut sit amet augue. Nunc egestas, dolor in cursus ultrices, enim diam fermentum diam, sed. "
             ),
-            dataTableOutput("groups_table")
+            DTOutput("groups_table")
           )
         )
       )

@@ -5,6 +5,8 @@
 # Used to define the back-end aspects of the app.
 ###################
 
+library(RSQLite)
+
 
 server <- function(input, output, session) {
   # Connect to SQLite database
