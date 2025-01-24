@@ -8,14 +8,14 @@
 
 server <- function(input, output, session) {
   # Connect to SQLite database
-  db_path <- "db/animal_culture_db.sqlite"
+  db_path <- "db/ACDB_v01.sql"
   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
   
   # Read tables from the SQLite database
-  groups_table <- dbReadTable(conn, "groups_table")
-  species_table <- dbReadTable(conn, "species_table")
-  behaviors_table <- dbReadTable(conn, "behaviors_table")
-  sources_table <- dbReadTable(conn, "sources_table")
+  groups_table <- dbReadTable(conn, "groups")
+  species_table <- dbReadTable(conn, "species")
+  behaviors_table <- dbReadTable(conn, "behaviors")
+  sources_table <- dbReadTable(conn, "sources")
   
   # Ensures that the connection is closed when the session ends
   on.exit(dbDisconnect(conn))
