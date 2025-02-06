@@ -18,7 +18,7 @@ ui <-
                      base_font = font_google("Roboto")  # Use a modern Google font
     ),
     div(
-      tags$img(src = "DDL logo_white.png", style = "height: 40px; margin-right: 10px;"),
+      tags$img(src = "DDLlogo_white.png", style = "height: 40px; margin-right: 10px;"),
       style = "font-size: 24px; font-weight: bold; padding: 0 20px;",
       "The Animal Culture Database"
     ),    
