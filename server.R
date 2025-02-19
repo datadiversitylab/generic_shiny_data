@@ -10,7 +10,7 @@ library(RSQLite)
 
 server <- function(input, output, session) {
   # Connect to SQLite database
-  db_path <- "db/ACDB_v01.sql"
+  db_path <- "db/ACDB_dev.sql"
   conn <- dbConnect(RSQLite::SQLite(), dbname = db_path)
   
   # Read tables from the SQLite database
