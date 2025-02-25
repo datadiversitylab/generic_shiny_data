@@ -13,6 +13,7 @@ library(bslib)
 library(shinyWidgets)
 library(DBI)
 library(RSQLite)
+library(leaflet.extras)
 
 #Load components
 source('ui.R')

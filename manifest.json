@@ -3600,7 +3600,7 @@
     },
     "taxize": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://cran.rstudio.com",
       "description": {
         "Package": "taxize",
         "Title": "Taxonomic Information from Around the Web",
@@ -4314,28 +4314,34 @@
   },
   "files": {
     "app.R": {
-      "checksum": "00ace18882273768336ea7dab73cadd7"
+      "checksum": "37d553a72bfd19d2844ae220c43cc27f"
     },
-    "db/ACDB_RSQLite_take2.R": {
+    "db/ACDB_dev_script.R": {
+      "checksum": "0295a739f52b44f9998ebd2385a58a71"
+    },
+    "db/ACDB_dev.sql": {
+      "checksum": "cbac58cfd491ac4d6df14b35259ea52e"
+    },
+    "db/archive/ACDB_RSQLite_take2.R": {
       "checksum": "3c4d136048e4621061e9d6f4919823b3"
     },
-    "db/ACDB_v01.sql": {
+    "db/archive/ACDB_v01.sql": {
       "checksum": "93bc37746d02c10eb05b969da11e9e80"
     },
-    "db/RSQLite_ACDB.R": {
+    "db/archive/RSQLite_ACDB.R": {
       "checksum": "3d7cd3fedbcd967c203011915c83daa1"
     },
-    "db/table_csvs/behaviors_jan24.25.csv": {
-      "checksum": "d83810b2bcb228896d0aa33138934bbd"
+    "db/table_csvs/behaviors_feb18.25.csv": {
+      "checksum": "330f81eb136b1d2e5759407a80783534"
     },
     "db/table_csvs/groups_jan24.25.csv": {
-      "checksum": "cb1b1ee24a02c0d7e9b6e471b533ada7"
+      "checksum": "4acecadbb9abcfc6cc27679975819028"
     },
-    "db/table_csvs/sources_jan23.25.csv": {
-      "checksum": "a55a2b30d55f14b824e2eb1afe1538b8"
+    "db/table_csvs/sources_feb17.25.csv": {
+      "checksum": "bf5c4a4c4f70c956a68bd3c3c82e3e6b"
     },
     "db/table_csvs/species_jan23.25.csv": {
-      "checksum": "a471caae291e93ba7bf0cf99ed30f9d3"
+      "checksum": "2423de5e5fd42784fe39971fa9ddf003"
     },
     "LICENSE": {
       "checksum": "1ebbd3e34237af26da5dc08a4e440464"
@@ -4343,13 +4349,16 @@
     "README.md": {
       "checksum": "e2ffa220a8af22bfa298b8d9ab3792bb"
     },
+    "renv.lock": {
+      "checksum": "590a201a44ddadcf4ce677d0265aefe7"
+    },
     "server.R": {
-      "checksum": "080e7a04e0ac59591b164edcecfab56a"
+      "checksum": "d1f36e75d026136c40ce3f4d83629ef6"
     },
     "ui.R": {
-      "checksum": "53ecc874eaf8ad908a8fdd7bfa74fd81"
+      "checksum": "5c8e8c6cd28bc9a921f58ee42160a0cc"
     },
-    "www/DDL Logo_white.png": {
+    "www/DDLLogo_white.png": {
       "checksum": "4f872804a7e9eb626fab73ef80dfd02d"
     },
     "www/globe_animals.png": {

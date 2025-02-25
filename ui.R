@@ -15,10 +15,10 @@ ui <-
     theme = bs_theme(bootswatch = "cosmo",
                      primary = "#4CAF50",
                      secondary = "#555555",
-                     base_font = font_google("Roboto")  # Use a modern Google font
+                     base_font = font_google("Roboto")
     ),
     div(
-      tags$img(src = "DDLlogo_white.png", style = "height: 40px; margin-right: 10px;"),
+      tags$img(src = "DDLLogo_white.png", style = "height: 40px; margin-right: 10px;"),
       style = "font-size: 24px; font-weight: bold; padding: 0 20px;",
       "The Animal Culture Database"
     ),    
@@ -57,30 +57,32 @@ ui <-
               style = "font-size: 24px; font-weight: 300; text-align: center; color: #555555; margin-bottom: 40px;",
               "Exploring the World’s Diversity of Nonhuman Animal Traditions"
             ),
+            #br(),
+            tags$div(
+              style = "text-align: center; margin-top: 30px;",
+              tags$img(
+                src = "globe_animals.png", 
+                style = "max-width: 40%; height: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px;"
+              )
+            ),
+            br(),
             
             # Introduction text
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              " In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam luctus, ipsum quis posuere aliquam, justo felis eleifend arcu, quis vehicula ligula diam in massa. Sed sed nisl et tellus iaculis vulputate at eget quam. Duis sed tortor tellus. Aenean lacus neque, congue sit amet ligula id, condimentum accumsan justo. Nunc eu cursus massa, in dictum orci. Phasellus a erat in dui consectetur dapibus. "
+              "The ACDB (Animal Culture Database) is a database containing variables on socially learned behavioral traditions in wild animal populations worldwide. At present, the database contains data on 102 populations of birds and mammals across six continents, with descriptions of behaviors including migration, vocal dialects, foraging methods, and mating displays."
             ),
-            tags$p(
-              style = "text-align: justify; margin-bottom: 15px;",
-              " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus feugiat justo, non efficitur augue fringilla id. Donec at elit blandit, faucibus nisi eu, posuere turpis. Aenean dapibus odio eu diam euismod, vel interdum elit pulvinar. Vivamus at lorem a neque hendrerit sollicitudin. Donec at suscipit neque. Integer eget gravida lacus. Maecenas luctus dapibus hendrerit. Integer vel metus sed diam volutpat sagittis. Aliquam eu convallis tellus. Ut hendrerit ut mauris accumsan egestas. Vivamus iaculis ut mauris sed eleifend. "
-            ),
-            tags$p(
-              style = "text-align: justify; margin-bottom: 15px;",
-              " Sed pretium eros sit amet magna scelerisque, non posuere elit placerat. Pellentesque consectetur neque massa, nec commodo nisl convallis vel. Aliquam in pellentesque elit. Nulla bibendum rhoncus libero vitae viverra. Vivamus tincidunt enim a turpis scelerisque interdum. Nunc ullamcorper lacinia nulla, vitae tempus magna ultrices ut. Quisque bibendum viverra nisi ut mollis. Donec accumsan massa leo, non fringilla eros malesuada eu. Donec convallis justo vel commodo vulputate. "
-            ),
+            
+            # Explore button
             tags$div(
               style = "text-align: center;",
               actionButton(inputId = "explore_button", 
                            label = "Explore the Database",
                            style = "display:inline-block; padding: 15px 30px; border-radius: 5px; background: #4CAF50; color: #ffffff; text-decoration: none; font-size: 18px; font-weight: 400; transition: background 0.3s ease;")
-              
             )
           ),
           
-          # Quick Stats Section 
+          # Quick stats section 
           tags$div(
             style = "margin-top: 40px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
             tags$h3(
@@ -109,10 +111,10 @@ ui <-
               )
             )
           )
-          
         )
       )
     )
+    
     ,
     
     # Populations page
@@ -134,16 +136,16 @@ ui <-
             ),
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              " In non nulla sed neque pellentesque semper ut quis odio. Nulla pellentesque ante arcu, sit amet aliquam lectus aliquam at. Nunc semper quam eu ex eleifend, ut tempor lacus aliquam. Quisque at libero ipsum. Aliquam erat volutpat. Phasellus libero nulla, ultricies id aliquam id, sodales sit amet odio. Maecenas luctus sit amet ex eu faucibus. Sed blandit, tortor sed dignissim rutrum, lorem est congue elit, vitae dapibus nunc diam vitae metus. In sed tortor non ante laoreet laoreet. Cras vel tellus euismod, iaculis orci fringilla, efficitur dolor. Sed egestas ultrices accumsan. "
+              " A ‘group’ in this database is a population of animals within a species that displays one or more socially transmitted behaviors forming a tradition. There can be multiple groups within a species, and groups nested within other groups in species with multilevel social structures such as killer whales and elephants. For instance, there may be multiple pods of killer whales in a clan, and they may share a whistle dialect at the pod level and a pulsed call dialect at the clan level. "
             ),
-            tags$p(
-              style = "text-align: justify; margin-bottom: 15px;",
-              " Vestibulum et erat at mauris ornare feugiat. Vivamus vitae augue ac neque congue egestas sed nec turpis. Nam dolor nunc, aliquam venenatis interdum mattis, luctus in velit. Nulla facilisi. Nullam interdum diam vel lobortis bibendum. Nulla ut sem elit. In at sapien fringilla, auctor elit ac, vulputate ante. Maecenas viverra consectetur venenatis. Cras eu dapibus augue, ut pretium quam. Sed commodo lacinia lacus accumsan mollis. Fusce imperdiet ligula eros, vitae pellentesque mauris convallis eu. Vestibulum facilisis purus in risus cursus, vitae eleifend mi consequat. "
-            ),
-            tags$p(
-              style = "text-align: justify; margin-bottom: 0;",
-              " Nunc placerat blandit enim, ac convallis magna pharetra at. Donec quis ornare mi, hendrerit tristique eros. Curabitur ultrices ultricies ornare. Suspendisse potenti. Cras iaculis turpis eget arcu pretium feugiat. Pellentesque condimentum lorem quis facilisis sollicitudin. Nulla eu lacus elementum, scelerisque quam non, condimentum turpis. Nunc at lectus at quam varius feugiat vitae ac ante. In suscipit sagittis augue accumsan maximus. Sed et elit et mi laoreet efficitur id quis neque. "
-            )
+            # tags$p(
+            #   style = "text-align: justify; margin-bottom: 15px;",
+            #   " Vestibulum et erat at mauris ornare feugiat. Vivamus vitae augue ac neque congue egestas sed nec turpis. Nam dolor nunc, aliquam venenatis interdum mattis, luctus in velit. Nulla facilisi. Nullam interdum diam vel lobortis bibendum. Nulla ut sem elit. In at sapien fringilla, auctor elit ac, vulputate ante. Maecenas viverra consectetur venenatis. Cras eu dapibus augue, ut pretium quam. Sed commodo lacinia lacus accumsan mollis. Fusce imperdiet ligula eros, vitae pellentesque mauris convallis eu. Vestibulum facilisis purus in risus cursus, vitae eleifend mi consequat. "
+            # ),
+            # tags$p(
+            #   style = "text-align: justify; margin-bottom: 0;",
+            #   " Nunc placerat blandit enim, ac convallis magna pharetra at. Donec quis ornare mi, hendrerit tristique eros. Curabitur ultrices ultricies ornare. Suspendisse potenti. Cras iaculis turpis eget arcu pretium feugiat. Pellentesque condimentum lorem quis facilisis sollicitudin. Nulla eu lacus elementum, scelerisque quam non, condimentum turpis. Nunc at lectus at quam varius feugiat vitae ac ante. In suscipit sagittis augue accumsan maximus. Sed et elit et mi laoreet efficitur id quis neque. "
+            # )
           )
         ),
         
@@ -160,7 +162,7 @@ ui <-
             ),
             tags$p(
               style = "margin-bottom: 10px;",
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper risus massa, quis facilisis augue vehicula ut. Pellentesque posuere porta luctus. Integer massa erat, imperdiet non pharetra nec, tempus eget. "
+              "This map displays the approximate geographic location of the populations in the database. For some species with wide ranges (e.g. whales), the coordinates given are somewhere in the middle of the range. The “location source” variable in the groups table can be used to find further details on the location in the referenced publication. More detailed location and range data is a goal for future versions of the database. "
             ),
             leafletOutput("population_map", height = 400)
             
@@ -175,10 +177,22 @@ ui <-
             ),
             tags$p(
               style = "margin-bottom: 10px;",
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non nunc vitae augue convallis maximus ut sit amet augue. Nunc egestas, dolor in cursus ultrices, enim diam fermentum diam, sed. "
+              "Click on each group to display taxonomic information, a list of behaviors and descriptions, and a focused map of the group location. The ‘search’ bar can be used to filter for specific entries. "
             ),
             DTOutput("groups_table")
           )
+        )
+      )
+    ),
+    
+    # Citations
+    tabPanel(
+      tags$div(icon("book"), "Citations"),
+      fluidPage(
+        titlePanel("Citations and Evidence Types"),
+        tags$div(
+          style = "padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;",
+          dataTableOutput("citations_table")
         )
       )
     ),
@@ -190,7 +204,7 @@ ui <-
         tags$div(
           style = "max-width: 900px; margin: 0 auto; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.8;",
           
-          # Help Introduction
+          # Help introduction
           tags$div(
             style = "background-color: #f9f9f9; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
             tags$h1(
@@ -199,11 +213,14 @@ ui <-
             ),
             tags$p(
               style = "text-align: center; color: #555555; margin-bottom: 40px;",
-              " Nunc sodales libero et tortor interdum, nec viverra libero cursus. In lobortis ligula quam, vitae ultrices neque aliquam sed. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc sapien neque, faucibus in rutrum id, dignissim ut turpis. Pellentesque gravida mauris non convallis tristique. Mauris vel cursus nisi, in pretium neque. In hendrerit est eget sodales varius. "
+              "Please contact ",
+              tags$a(href = "mailto:kcb7@arizona.edu", "Dr. Kiran Basava"),
+              " if your questions are not answered below!"
             )
+            
           ),
           
-          # FAQ Sections
+          # FAQ Section
           tags$div(
             style = "margin-top: 20px;",
             
@@ -216,7 +233,7 @@ ui <-
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis felis ac felis efficitur suscipit. Curabitur vitae lacus vel ligula aliquet dignissim quis eget lacus."
+                "Use the ‘search’ bar in the population data table to search for specific groups, species, or locations."
               )
             ),
             
@@ -225,12 +242,16 @@ ui <-
               style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
               tags$h4(
                 style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "How can I contribute data to the database?"
+                "How can I download data?"
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent interdum, nisl eu interdum aliquet, felis nulla sollicitudin elit, in faucibus risus urna vel justo."
+                "Please visit our ",
+                tags$a(href = "https://github.com/datadiversitylab/ACDB_datarelease", 
+                       "GitHub repository"),
+                " for the current release of the SQLite database, or you can download separate CSV files for each table (in the table_csvs folder)."
               )
+              
             ),
             
             # Question 3
@@ -238,15 +259,42 @@ ui <-
               style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
               tags$h4(
                 style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "Where can I learn more about animal culture?"
+                "How can I contribute data to the database?"
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper enim nec justo congue, ac cursus mauris aliquet. Pellentesque habitant morbi tristique senectus et netus."
+                "We are currently working on a pipeline for contributions from researchers. For now, please email ",
+                tags$a(href = "mailto:kcb7@arizona.edu", "Dr. Basava"),
+                " with a description of the sort of data you would like to be added. Thank you for your interest in contributing data!"
               )
+              
             ),
             
             # Question 4
+            tags$div(
+              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
+              tags$h4(
+                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
+                "Where can I learn more about animal culture?"
+              ),
+              tags$p(
+                "Some recent and accessible reviews of the research on animal culture include:", 
+                tags$br(),
+                tags$a(href = "https://onlinelibrary.wiley.com/doi/10.1002/bies.201900060", 
+                       "Allen, Jenny A. (2019). Community through Culture: From Insects to Whales: How Social Learning and Culture Manifest across Diverse Animal Communities."),
+                tags$br(),
+                tags$a(href = "https://www.science.org/doi/10.1126/science.abe6514", 
+                       "Whiten, Andrew. (2021). The Burgeoning Reach of Animal Culture."),
+                tags$br(), tags$br(),
+                "For the relevance of animal culture to conservation:",
+                tags$br(),
+                tags$a(href = "https://www.science.org/doi/abs/10.1126/science.aaw3557", 
+                       "Brakes, Philippa, et al. (2019). Animal Cultures Matter for Conservation.")
+              )
+              
+            ),
+            
+            # Question 5
             tags$div(
               style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
               tags$h4(
@@ -255,7 +303,8 @@ ui <-
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nisi erat. Fusce faucibus purus in magna vehicula consequat. Aliquam tempus vitae libero et laoreet."
+                "Please contact",
+                tags$a(href = "mailto:cromanpa@arizona.edu", "Dr. Román-Palacios.")
               )
             )
           )
