@@ -34,7 +34,7 @@ Resources with functionalities that overlap with ACDB:
 
 ### Access the Shiny App
 
-You can access the ACDB Shiny app [here](#). The app provides an interactive interface to explore the database.
+You can access the ACDB Shiny app [here]([#](https://viz.datascience.arizona.edu/ACDB/)). The app provides an interactive interface to explore the database.
 
 ### Repository Contents
 
