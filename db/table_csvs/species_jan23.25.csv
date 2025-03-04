@@ -29,7 +29,7 @@ Pan_troglodytes_verus,western chimpanzee,5707422,Pan troglodytes verus,Pan,Homin
 Sotalia_guianensis,Guiana dolphins,2440542,Sotalia guianensis,Sotalia,Delphinidae,Cetacea,Mammalia,Chordata,not searched,not searched,not searched,DD
 Pan_troglodytes_schweinfurthii,eastern chimpanzee,5707421,Pan troglodytes schweinfurthii,Pan,Hominidae,Primates,Mammalia,Chordata,group,"""multimale - multifemale, fission-fusion communities""",GBIF,EN
 Pipistrellus_pipistrellus,common pipistrelle,5218465,Pipistrellus pipistrellus,Pipistrellus,Vespertilionidae,Chiroptera,Mammalia,Chordata,not searched,not searched,not searched,LC
-Ateles_geoffroyi,spider monkeys,2436643,Ateles geoffroyi,Ateles,Atelidae,Primates,Mammalia,Chordata,not searched,not searched,not searched,EN
+Ateles_geoffroyi,spider monkeys,2436643,Ateles geoffroyi,Ateles,Atelidae,Primates,Mammalia,Chordata,family,"""Females tend to travel alone with their infants and juveniles in groups of 3 — 4 individuals. Adult males travel together but form consortships with females when they are receptive.""",GBIF,EN
 Zonotrichia_capensis,Rufous-collared sparrow,5231103,Zonotrichia capensis,Zonotrichia,Passerellidae,Passeriformes,Aves,Chordata,not searched,not searched,not searched,LC
 Pan_troglodytes_troglodytes,"Nigerian-Cameroon chimpanzee, Central chimpanzee",7262069,Pan troglodytes troglodytes,Pan,Hominidae,Primates,Mammalia,Chordata,not searched,not searched,not searched,EN
 Passerculus_sandwichensis,Savannah Sparrow,5231142,Passerculus sandwichensis,Passerculus,Passerellidae,Passeriformes,Aves,Chordata,not searched,not searched,not searched,LC
