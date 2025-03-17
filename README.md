@@ -52,8 +52,3 @@ We welcome contributions from researchers to expand and update the database. Ple
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
-
-For questions or comments, please contact [Kiran Basava](mailto:kcb7@arizona.edu).
-
-
