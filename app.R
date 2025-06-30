@@ -7,14 +7,12 @@
 
 library(shiny)
 library(shinyjs)
-library(leaflet)
 library(DT)
 library(bslib)
 library(shinyWidgets)
 library(DBI)
 library(RSQLite)
-library(leaflet.extras)
-
+library(here)
 #Load components
 source('ui.R')
 source('server.R')
