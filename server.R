@@ -38,7 +38,7 @@ server <- function(input, output, session) {
       geom_density(alpha = 0.5) +
       facet_wrap(~feature, scales = "free") +
       theme_minimal() +
-      labs(title = "Distributions by Species", x = "", y = "Density")
+      labs(title = "Distributions by species", x = "", y = "Density")
   })
   
   # Summary table: species-level
@@ -77,8 +77,7 @@ server <- function(input, output, session) {
       count(sex) %>%
       tidyr::pivot_wider(names_from = sex, values_from = n, values_fill = 0)
     
-    year_distribution <- species_data %>%
-      count(year)
+    year_distribution <- species_data %>% count(year)
     
     showModal(modalDialog(
       title = paste("Details for", selected_species),
