@@ -22,8 +22,7 @@ penguins_data <- dbReadTable(con, "penguins")
 dbDisconnect(con)
 
 
-
-shinyServer(function(input, output, session) {
+server <- function(input, output, session) {
   
   # Clean data: remove rows with NA in core numeric fields
   penguins_clean <- na.omit(penguins_data)
@@ -98,5 +97,5 @@ shinyServer(function(input, output, session) {
     ))
   })
   
-})
+}
 

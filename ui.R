@@ -20,7 +20,7 @@ ui <-
     div(
       tags$img(src = "DDLLogo_white.png", style = "height: 40px; margin-right: 10px;"),
       style = "font-size: 24px; font-weight: bold; padding: 0 20px;",
-      "Template"
+      "Generic database release template"
     ),    
     header = tags$style(
       HTML("
@@ -55,7 +55,7 @@ ui <-
             ),
             tags$h2(
               style = "font-size: 24px; font-weight: 300; text-align: center; color: #555555; margin-bottom: 40px;",
-              "Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus."
+              "This app can serve as a template to deploy other datasets either in CSV or SQL liteformats. Feel free to modify the structure of the app, as well as to replace the text and adjust visuals, structure of the table, etc throughout the app."
             ),
             #br(),
             tags$div(
@@ -66,20 +66,17 @@ ui <-
               )
             ),
             br(),
-            
             # Introduction text
             tags$p(
               style = "text-align: justify; margin-bottom: 15px;",
-              "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."
+              "The Data tab includes samples of visuals that can be generated from the dataset, a table showing the latest version of the dataset, as well as additional functionality concerned with modals associated with rows in the data table."
             )
           )
         )
       )
-    )
+    ),
     
-    ,
-    
-    # Populations page (updated for penguins)
+    # Dataset page (updated for penguins)
     tabPanel(
       value = "Populations_tab",
       tags$div(icon("globe"), "Data"),
@@ -125,7 +122,6 @@ ui <-
       )
     ),
     
-    
     # Help tab
     tabPanel(
       tags$div(icon("question-circle"), "Help"),
@@ -144,7 +140,9 @@ ui <-
               style = "text-align: center; color: #555555; margin-bottom: 40px;",
               "Please contact ",
               tags$a(href = "mailto:kcb7@arizona.edu", "Dr. Kiran Basava"),
-              " if your questions are not answered below!"
+              "or",
+              tags$a(href = "mailto:cromanpa@arizona.edu", "Dr. Cristian Román"),
+              " with questions!"
             )
             
           ),
@@ -158,11 +156,11 @@ ui <-
               style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
               tags$h4(
                 style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "How do I search for populations?"
+                "Where can I find the associated code?"
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Use the ‘search’ bar in the population data table to search for specific groups, species, or locations."
+                tags$a(href = "https://github.com/datadiversitylab/generic_shiny_data", "Here is the GitHub repo.")
               )
             ),
             
@@ -171,70 +169,13 @@ ui <-
               style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
               tags$h4(
                 style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "How can I download data?"
+                "How can I contribute data to the template?"
               ),
               tags$p(
                 style = "text-align: justify; margin: 0;",
-                "Please visit our ",
-                tags$a(href = "https://github.com/datadiversitylab/ACDB_datarelease", 
-                       "GitHub repository"),
-                " for the current release of the SQLite database, or you can download separate CSV files for each table (in the table_csvs folder)."
+                "You can email us or open an issue on GitHub. We would love to have your input!"
               )
               
-            ),
-            
-            # Question 3
-            tags$div(
-              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
-              tags$h4(
-                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "How can I contribute data to the database?"
-              ),
-              tags$p(
-                style = "text-align: justify; margin: 0;",
-                "We are currently working on a pipeline for contributions from researchers. For now, please email ",
-                tags$a(href = "mailto:kcb7@arizona.edu", "Dr. Basava"),
-                " with a description of the sort of data you would like to be added. Thank you for your interest in contributing data!"
-              )
-              
-            ),
-            
-            # Question 4
-            tags$div(
-              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
-              tags$h4(
-                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "Where can I learn more about animal culture?"
-              ),
-              tags$p(
-                "Some recent and accessible reviews of the research on animal culture include:", 
-                tags$br(),
-                tags$a(href = "https://onlinelibrary.wiley.com/doi/10.1002/bies.201900060", 
-                       "Allen, Jenny A. (2019). Community through Culture: From Insects to Whales: How Social Learning and Culture Manifest across Diverse Animal Communities."),
-                tags$br(),
-                tags$a(href = "https://www.science.org/doi/10.1126/science.abe6514", 
-                       "Whiten, Andrew. (2021). The Burgeoning Reach of Animal Culture."),
-                tags$br(), tags$br(),
-                "For the relevance of animal culture to conservation:",
-                tags$br(),
-                tags$a(href = "https://www.science.org/doi/abs/10.1126/science.aaw3557", 
-                       "Brakes, Philippa, et al. (2019). Animal Cultures Matter for Conservation.")
-              )
-              
-            ),
-            
-            # Question 5
-            tags$div(
-              style = "margin-bottom: 30px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);",
-              tags$h4(
-                style = "font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 10px;",
-                "Who can I contact for technical support?"
-              ),
-              tags$p(
-                style = "text-align: justify; margin: 0;",
-                "Please contact",
-                tags$a(href = "mailto:cromanpa@arizona.edu", "Dr. Román-Palacios.")
-              )
             )
           )
         )
