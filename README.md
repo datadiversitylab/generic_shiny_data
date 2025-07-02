@@ -2,9 +2,7 @@
 
 ## Getting Started
 
-### Access the Shiny App
-
-You can access the ACDB Shiny app [here]([#]()). The app provides an interactive interface to explore the database.
+You can use this Shiny app template to deploy your own database in a live format. The main changes that need to be implemented relate to indicating explicitly the new dataset (a `csv` or `sqlite`), including details on the UI, and adjusting the server to display the elements that are needed given your dataset. A live version of this template can be seen as part of the [Animal Culture Database](https://github.com/datadiversitylab/ACDB).
 
 ### Repository Contents
 
@@ -16,7 +14,7 @@ You can access the ACDB Shiny app [here]([#]()). The app provides an interactive
 
 ## Contribution guidelines
 
-We welcome contributions from researchers to expand and update the database. Please see the [Contribution Guidelines](#) for instructions on how to submit your data.
+We welcome contributions from researchers to expand and update the database. Please open an issue to suggest ways to enhance the app.
 
 ## License
 
